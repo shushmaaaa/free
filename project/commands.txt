@@ -1,0 +1,58 @@
+CREATE TABLE bikes();
+ALTER TABLE bikes ADD COLUMN bike_id SERIAL PRIMARY KEY;
+ALTER TABLE bikes ADD COLUMN type VARCHAR(50) NOT NULL;
+ALTER TABLE bikes ADD COLUMN size INT NOT NULL;
+ALTER TABLE bikes ADD COLUMN available BOOLEAN NOT NULL DFAULT TRUE;
+
+UPDATE bikes SET available=False where available=True;
+ UPDATE bikes SET available=True WHERE type != 'BMX';
+
+
+
+ CREATE TABLE customers();
+ ALTER TABLE customers ADD COLUMN phone VARCHAR(15) NOT NULL UNIQUE;
+ ALTER TABLE customers ADD COLUMN name VARCHAR(40) NOT NULL ;
+
+
+ CREATE TABLE rentals();
+ ALTER TABLE rentals  ADD COLUMN  rental_id SERIAL PRIMARY KEY;
+ ALTER TABLE rentals ADD COLUMN customer_id INT NOT NULL;
+ ALTER TABLE rentals ADD FOREIGN KEY(customer_id) REFERENCES customers(customer_id);
+ALTER TABLE rentals ADD COLUMN  bike_id INT NOT NULL;
+ALTER TABLE rentals ADD FOREIGN KEY(bike_id) REFERENCES bikes(bike_id);
+ALTER TABLE rentals ADD COLUMN date_rented DATE NOT NULL DEFAULT NOW();
+ALTER TABLE rentals ADD COLUMN date_returned DATE;
+INSERT INTO bikes(type,size) VALUES('Mountain',27);
+
+
+
+
+
+
+
+
+
+
+he ^ signifies the start of the pattern, and $ means the end. So the input will have to start, contain a number 0-9, and end.
+[[ a1 =~ ^[0-9]$ ]]; echo $?
+
+[[ 11 =~ ^[0-9]+$ ]]; echo $? any string that ^(starts) from 0-9[0-9] and containe one or more same i.e. is number (+) and ends ($)
+
+
+
+
+
+
+What you put in the subshell ($(...)) will be executed, and the result of it will replace the subshell. In
+
+
+
+camper: /project$ echo "$(echo ' M e ' | sed 's/^ //g')."
+
+echo "$(echo '   M e ' | sed 's/^ *//g')."
+
+echo "$(echo '   M e   ' | sed 's/ *$//g')."
+
+
+
+ echo "$(echo '   M e   ' | sed -E 's/^ *| *$//g')."

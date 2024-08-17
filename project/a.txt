@@ -1,0 +1,110 @@
+postgreSQL
+
+DATATYPE
+INT,VARCHAR,SERIAL,NUMREIC
+
+
+SERIAL= int auto increment;
+NUMBERIC(4,1)= can have upto 4 diigits in total and only 1 digit after the decimal
+
+
+KEY
+Foreign Key
+Primary Key
+Composite Key
+
+
+
+
+
+\l
+
+CREATE DATABASE database_name;
+
+\c databse_name  #connect to that databse
+
+\d #display tables
+
+CREATE TABLE table_name();
+CREATE TABLE table_name(column_name DATATYPE CONSTRAINTS);
+=CREATE TABLE sounds(sound_id SERIAL PRIMARY KEY);
+
+ALTER TABLE old_table_name RENAME TO new_table_name;
+=ALTER TABLE major_courses RENAME TO majors_courses
+
+
+ \d table_name  #view table details
+ 
+ALTER TABLE table_name ADD COLUMN column_name DATATYPE CONSTRAINT;
+= ALTER TABLE characters ADD COLUMN name VARCHAR(30) NOT NULL;
+
+
+
+ALTER TABLE table_name DROP COLUMN column_name;
+
+
+ALTER TABLE table_name RENAME COLUMN column_name TO new_name;
+
+INSERT INTO table_name(column_1, column_2) VALUES(value1, value2);
+=INSERT INTO second_table(id,username) VALUES(1,'Samus')
+
+SELECT columns FROM table_name;=SELECT id,username FROM second_table;
+
+
+DELETE FROM table_name WHERE condition;=DELETE FROM second_table WHERE username='Luigi';
+
+DROP TABLE table_name;=DROP TABLE second_table;
+
+
+ALTER DATABASE database_name RENAME TO new_database_name;=ALTER DATABASE first_database RENAME TO  mario_database;
+
+
+UPDATE table_name SET column_name=new_value WHERE condition;=UPDATE characters SET favorite_color='Orange' WHERE name='Daisy';
+
+
+SELECT columns FROM table_name ORDER BY column_name;
+=SELECT * FROM characters ORDER BY character_id;
+
+
+ALTER TABLE table_name ADD PRIMARY KEY(column_name);=ALTER TABLE characters ADD PRIMARY KEY(name);
+
+ALTER TABLE table_name DROP CONSTRAINT constraint_name; = AlTER TABLE characters DROP CONSTRAINT characters_pkey;
+
+
+
+
+
+
+creating foreign key
+ALTER TABLE table_name ADD COLUMN column_name DATATYPE REFERENCES referenced_table_name(referenced_column_name);
+=ALTER TABLE more_info ADD COLUMN character_id INT REFERENCES characters(character_id);
+
+
+
+
+
+ALTER TABLE table_name ADD UNIQUE(column_name);=LTER TABLE more_info ADD UNIQUE(character_id);
+
+
+
+ALTER TABLE table_name ALTER COLUMN column_name SET NOT NULL;
+=ALTER TABLE more_info ALTER COLUMN character_id SET NOT NULL;
+
+
+INSERT INTO more_info(birthday,height,weight,character_id) VALUES('1981-07-09',155,64.5,1);		
+
+ALTER TABLE table_name ADD FOREIGN KEY(column_name) REFERENCES referenced_table(referenced_column);
+=ALTER TABLE character_actions ADD FOREIGN KEY(character_id) REFERENCES characters(character_id);
+
+
+
+SELECT columns FROM table_1 FULL JOIN table_2 ON table_1.primary_key_column = table_2.foreign_key_column;
+= SELECT * FROM characters FULL JOIN more_info ON characters.character_id
+= more_info.character_id;
+
+
+SELECT columns FROM junction_table
+FULL JOIN table_1 ON junction_table.foreign_key_column = table_1.primary_key_column
+FULL JOIN table_2 ON junction_table.foreign_key_column = table_2.primary_key_column;
+=SELECT * FROM character_actions FULL JOIN characters ON character_actions.character_id = characters.character_id FULL JOIN actions ON character_actions.action_id = actions.action_id;
+
